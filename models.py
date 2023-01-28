@@ -1,4 +1,4 @@
-# from pydantic import BaseModel
+from pydantic import BaseModel
 
-# class DumpModel(BaseModel):
-#     dumpInfo: str
+class DumpModel(BaseModel):
+    body: str
