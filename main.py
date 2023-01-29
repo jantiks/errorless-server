@@ -7,12 +7,12 @@ app = FastAPI()
 
 @app.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {"message": "Hello Ibra"}
     
 @app.post("/upload")
 async def upload(file: UploadFile):
     await filesUtil.processDSYM(file)
-    return {"message": "dSYM file extracted and saved successfully"}
+    return {"message": "Success"}
 
 @app.post("/crash")
 async def crash(file: UploadFile):
@@ -20,12 +20,24 @@ async def crash(file: UploadFile):
         f.write(await file.read())
         
     symbolicate_crash()
-    return {"message": "Bye"}
+    return {"message": "Success"}
 
 @app.post("/dump")
 def dumpInfo(info: models.DumpModel):
     print(info.body)
-    return info.body
+    return {"message": "Success"}
+
+@app.post("/notification")
+def recieveNotification(notification: models.NotificationModel):
+    print(notification.title)
+    return {"message": "Success"}
+
+@app.post("/event")
+def postEvent(event: models.EventModel):
+    print(event.name, event.date)
+    return {"message": "Success"}
+
+
 
 import subprocess
 
